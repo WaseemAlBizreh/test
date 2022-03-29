@@ -1,24 +1,21 @@
-import 'package:commerce_app/utils/theme.dart';
-import 'package:commerce_app/view/widgets/AuthWidget/AuthButton.dart';
-import 'package:commerce_app/view/widgets/AuthWidget/auth_text_from_field.dart';
-import 'package:commerce_app/view/widgets/text_util.dart';
+import 'package:commerce_app/logic/controllers/auth_screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../widgets/AuthWidget/AuthUnderContainer.dart';
+import '../../../routes/routes.dart';
+import '../../../utils/theme.dart';
+import '../../../utils/validation_util.dart';
+import '../../widgets/AuthWidget/auth_button.dart';
+import '../../widgets/AuthWidget/auth_text_from_field.dart';
+import '../../widgets/AuthWidget/auth_under_container.dart';
+import '../../widgets/text_util.dart';
 
 class SignUpScreen extends StatelessWidget {
-  final nameController = TextEditingController();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
-
-  final _formKey = GlobalKey<FormState>();
+  final controller = Get.find<AuthController>();
 
   SignUpScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +28,7 @@ class SignUpScreen extends StatelessWidget {
             children: [
               SizedBox(
                 width: double.infinity,
-                height: ScreenUtil().screenHeight,
+                height: ScreenUtil().screenHeight * 0.88,
                 child: Padding(
                   padding: EdgeInsets.only(
                     top: 80.h,
@@ -39,7 +36,6 @@ class SignUpScreen extends StatelessWidget {
                     right: 25.w,
                   ),
                   child: Form(
-                    key: _formKey,
                     child: Column(
                       children: [
                         Row(
@@ -79,21 +75,12 @@ class SignUpScreen extends StatelessWidget {
                           height: 50.h,
                         ),
                         AuthTextFromField(
-                          controller: nameController,
+                          textFieldKey: controller.nameKey.value,
+                          onChanged: controller.setName,
                           obscureText: false,
                           keyboardType: TextInputType.text,
                           textInputAction: TextInputAction.next,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'please enter UserName';
-                            }
-                            if (value.length < 2) {
-                              return 'Must be more than 2 number or characters';
-                            }
-                            if (value.length > 30) {
-                              return 'Must be less than 30 number or characters';
-                            }
-                          },
+                          validator: ValidationUtil.nameValidation,
                           hintText: 'User Name',
                           prefixIcon: Image.asset('assets/images/user.png'),
                           suffixIcon: const Text(''),
@@ -102,15 +89,12 @@ class SignUpScreen extends StatelessWidget {
                           height: 15.h,
                         ),
                         AuthTextFromField(
-                          controller: emailController,
+                          textFieldKey: controller.emailKey.value,
+                          onChanged: controller.setEmail,
                           obscureText: false,
                           keyboardType: TextInputType.emailAddress,
                           textInputAction: TextInputAction.next,
-                          validator: (value) {
-                            if (!GetUtils.isEmail(value)) {
-                              return 'Email is not valid';
-                            }
-                          },
+                          validator: ValidationUtil.emailValidation,
                           hintText: 'Email',
                           prefixIcon: Image.asset('assets/images/email.png'),
                           suffixIcon: const Text(''),
@@ -119,18 +103,12 @@ class SignUpScreen extends StatelessWidget {
                           height: 15.h,
                         ),
                         AuthTextFromField(
-                          controller: passwordController,
+                          textFieldKey: controller.passwordKey.value,
+                          onChanged: controller.setPassword,
                           obscureText: true,
                           keyboardType: TextInputType.text,
                           textInputAction: TextInputAction.next,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'please enter Password';
-                            }
-                            if (value.length < 8) {
-                              return 'Must be more than 8 number or characters';
-                            }
-                          },
+                          validator: ValidationUtil.passwordValidation,
                           hintText: 'Password',
                           prefixIcon: Image.asset('assets/images/lock.png'),
                           suffixIcon: const Text(''),
@@ -139,18 +117,12 @@ class SignUpScreen extends StatelessWidget {
                           height: 15.h,
                         ),
                         AuthTextFromField(
-                          controller: confirmPasswordController,
+                          textFieldKey: controller.confirmPasswordKey.value,
+                          onChanged: controller.setConfirmPassword,
                           obscureText: true,
                           keyboardType: TextInputType.text,
                           textInputAction: TextInputAction.done,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'please Confirm Password';
-                            }
-                            if (value.length < 8) {
-                              return 'Must be more than 8 number or characters';
-                            }
-                          },
+                          validator: ValidationUtil.confirmPasswordValidation,
                           hintText: 'Confirm Password',
                           prefixIcon: Image.asset('assets/images/lock.png'),
                           suffixIcon: const Text(''),
@@ -161,18 +133,23 @@ class SignUpScreen extends StatelessWidget {
                         AuthButton(
                           text: 'SIGN UP',
                           onPressed: () {
-                            _formKey.currentState!.validate();
+                            print(controller.userName.value);
+                            print(controller.userEmail.value);
+                            print(controller.password.value);
+                            print(controller.confirmPassword.value);
                           },
-                        ),
-                        UnderContainer(
-                          textButton: 'Log in',
-                          text: 'Already have an Account',
-                          onPressed: () {},
                         ),
                       ],
                     ),
                   ),
                 ),
+              ),
+              UnderContainer(
+                textButton: 'Log in',
+                text: 'Already have an Account',
+                onPressed: () {
+                  Get.toNamed(Routes.loginScreen);
+                },
               ),
             ],
           ),

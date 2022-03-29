@@ -18,7 +18,7 @@ class UnderContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 100.h,
+      height: ScreenUtil().screenHeight * 0.12,
       decoration: BoxDecoration(
         color: mainColor,
         borderRadius: BorderRadius.only(
@@ -27,22 +27,23 @@ class UnderContainer extends StatelessWidget {
         ),
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           TextUtils(
             color: Colors.white,
             text: text,
-            fontSize: 20.sp,
+            fontSize: 18.sp,
             fontWeight: FontWeight.w500,
             underline: TextDecoration.none,
           ),
           TextButton(
-            onPressed: () {},
+            onPressed: onPressed,
             child: TextUtils(
               color: Colors.white,
               text: textButton,
-              fontSize: 20.sp,
+              fontSize: 18.sp,
               fontWeight: FontWeight.bold,
-              underline: TextDecoration.none,
+              underline: TextDecoration.underline,
             ),
           ),
         ],

@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AuthTextFromField extends StatelessWidget {
-  final TextEditingController controller;
   final bool obscureText;
   final TextInputType keyboardType;
   final TextInputAction textInputAction;
   final Function validator;
+  final Function onChanged;
   final String hintText;
   final Widget prefixIcon;
   final Widget suffixIcon;
+  final GlobalKey<FormFieldState> textFieldKey;
 
   OutlineInputBorder BorderStyle = OutlineInputBorder(
     borderRadius: BorderRadius.circular(10.r),
@@ -18,7 +19,6 @@ class AuthTextFromField extends StatelessWidget {
 
   AuthTextFromField({
     Key? key,
-    required this.controller,
     required this.obscureText,
     required this.keyboardType,
     required this.textInputAction,
@@ -26,12 +26,15 @@ class AuthTextFromField extends StatelessWidget {
     required this.hintText,
     required this.prefixIcon,
     required this.suffixIcon,
+    required this.onChanged,
+    required this.textFieldKey,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller,
+      key: textFieldKey,
+      onChanged: (value) => onChanged(value),
       obscureText: obscureText,
       keyboardType: keyboardType,
       textInputAction: textInputAction,

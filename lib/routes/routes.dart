@@ -1,3 +1,4 @@
+import 'package:commerce_app/logic/bindings/auth_screens_binding.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,6 +28,7 @@ class AppRoutes {
       transition: Transition.leftToRight,
       curve: Curves.easeInOutBack,
       transitionDuration: const Duration(milliseconds: 1300),
+      binding: AuthBinding(),
     ),
     GetPage(
       name: Routes.forgotPasswordScreen,
@@ -35,6 +37,10 @@ class AppRoutes {
     GetPage(
       name: Routes.loginScreen,
       page: () => const LoginScreen(),
+      transition: Transition.zoom,
+      curve: Curves.easeInOutBack,
+      transitionDuration: const Duration(milliseconds: 1300),
+      binding: AuthBinding(),
     ),
   ];
 }
