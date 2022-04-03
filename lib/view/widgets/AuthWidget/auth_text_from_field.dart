@@ -47,7 +47,10 @@ class AuthTextFromField extends StatelessWidget {
           fontSize: 16.sp,
           fontWeight: FontWeight.w500,
         ),
-        contentPadding: EdgeInsets.all(17.h),
+        contentPadding: EdgeInsets.symmetric(
+          horizontal: 3.w,
+          vertical: 17.h,
+        ),
         filled: true,
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,

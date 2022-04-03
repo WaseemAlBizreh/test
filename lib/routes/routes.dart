@@ -1,4 +1,5 @@
 import 'package:commerce_app/logic/bindings/auth_screens_binding.dart';
+import 'package:commerce_app/view/screens/Auth/email_verification_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -42,6 +43,14 @@ class AppRoutes {
       transitionDuration: const Duration(milliseconds: 1300),
       binding: AuthBinding(),
     ),
+    GetPage(
+      name: Routes.emailVerification,
+      page: () => EmailVerification(),
+      transition: Transition.leftToRight,
+      curve: Curves.easeInOutBack,
+      transitionDuration: const Duration(milliseconds: 1300),
+      binding: AuthBinding(),
+    ),
   ];
 }
 
@@ -50,4 +59,5 @@ class Routes {
   static const signUpScreen = '/signUp_screen';
   static const forgotPasswordScreen = '/forgot_password_screen';
   static const loginScreen = '/login_screen';
+  static const emailVerification = '/email_verification_screen';
 }

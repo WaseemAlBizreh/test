@@ -7,11 +7,14 @@ class AuthController extends GetxController {
   final userEmail = ''.obs;
   final password = ''.obs;
   final confirmPassword = ''.obs;
-
+  final currentText = ''.obs;
+  final verificationNumber = 0.obs;
+  final pinCodeController = TextEditingController().obs;
   final nameKey = GlobalKey<FormFieldState>().obs;
   final emailKey = GlobalKey<FormFieldState>().obs;
   final passwordKey = GlobalKey<FormFieldState>().obs;
   final confirmPasswordKey = GlobalKey<FormFieldState>().obs;
+  final pinCodeKey = GlobalKey<FormState>().obs;
 
   void visibility() {
     isVisibility.value = !isVisibility.value;
@@ -35,5 +38,18 @@ class AuthController extends GetxController {
   void setConfirmPassword(String value) {
     confirmPasswordKey.value.currentState!.validate();
     confirmPassword.value = value;
+  }
+
+  void onChanged(String value) {
+    pinCodeKey.value.currentState!.validate();
+    currentText.value = value;
+  }
+
+  void setVerificationNumber(value) {
+    verificationNumber.value = int.parse(currentText.value);
+  }
+
+  void clearText() {
+    pinCodeController.value.clear();
   }
 }

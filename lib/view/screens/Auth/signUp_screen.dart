@@ -14,14 +14,14 @@ import '../../widgets/text_util.dart';
 
 class SignUpScreen extends StatelessWidget {
   final controller = Get.find<AuthController>();
-
+  final _formKey = GlobalKey<FormState>();
   SignUpScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        child: Container(
-          color: Colors.white,
+        child: SizedBox(
           height: ScreenUtil().screenHeight,
           width: ScreenUtil().screenWidth,
           child: Column(
@@ -36,6 +36,7 @@ class SignUpScreen extends StatelessWidget {
                     right: 25.w,
                   ),
                   child: Form(
+                    key: _formKey,
                     child: Column(
                       children: [
                         Row(
@@ -133,6 +134,8 @@ class SignUpScreen extends StatelessWidget {
                         AuthButton(
                           text: 'SIGN UP',
                           onPressed: () {
+                            _formKey.currentState!.validate();
+                            Get.toNamed(Routes.emailVerification);
                             print(controller.userName.value);
                             print(controller.userEmail.value);
                             print(controller.password.value);

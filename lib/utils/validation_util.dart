@@ -4,9 +4,7 @@ class ValidationUtil {
   static String validationEmail =
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
 
-  static String validationName = r'^[a-z A-Z]+$';
-
-  static String baseUrl = 'https://fakestoreapi.com';
+  static String validationName = r'^[a-zA-Z0-9 أ-ي]+$';
 
   static nameValidation(value) {
     if (value.toString().isEmpty || !RegExp(validationName).hasMatch(value)) {
@@ -43,6 +41,21 @@ class ValidationUtil {
     }
     if (value.toString().length < 8) {
       return 'Must be more than 8 number or characters';
+    }
+    // if(value.toString() != ){
+    //   return 'Password does not Match Confirm Password';
+    // }
+  }
+
+  static verificationValidation(value) {
+    if (value!.length < 6) {
+      return "Must be 6 number";
+    }
+  }
+
+  static checkPassword(String password, String confirmPassword) {
+    if (password.toString() != confirmPassword.toString()) {
+      return false;
     }
   }
 }
