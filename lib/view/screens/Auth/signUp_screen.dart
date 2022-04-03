@@ -123,7 +123,12 @@ class SignUpScreen extends StatelessWidget {
                           obscureText: true,
                           keyboardType: TextInputType.text,
                           textInputAction: TextInputAction.done,
-                          validator: ValidationUtil.confirmPasswordValidation,
+                          validator: (value) {
+                            ValidationUtil.confirmPasswordValidation(value);
+                            if (value.toString() != controller.password.value) {
+                              return 'Password does not Match Confirm Password';
+                            }
+                          },
                           hintText: 'Confirm Password',
                           prefixIcon: Image.asset('assets/images/lock.png'),
                           suffixIcon: const Text(''),

@@ -42,9 +42,6 @@ class ValidationUtil {
     if (value.toString().length < 8) {
       return 'Must be more than 8 number or characters';
     }
-    // if(value.toString() != ){
-    //   return 'Password does not Match Confirm Password';
-    // }
   }
 
   static verificationValidation(value) {
