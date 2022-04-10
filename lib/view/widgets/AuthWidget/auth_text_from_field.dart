@@ -10,7 +10,6 @@ class AuthTextFromField extends StatelessWidget {
   final String hintText;
   final Widget prefixIcon;
   final Widget suffixIcon;
-  // final GlobalKey<FormFieldState> textFieldKey;
 
   OutlineInputBorder BorderStyle = OutlineInputBorder(
     borderRadius: BorderRadius.circular(10.r),
