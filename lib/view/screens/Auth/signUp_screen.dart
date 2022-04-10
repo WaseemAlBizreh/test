@@ -14,7 +14,6 @@ import '../../widgets/text_util.dart';
 
 class SignUpScreen extends StatelessWidget {
   final controller = Get.find<AuthController>();
-  final _formKey = GlobalKey<FormState>();
   SignUpScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -36,7 +35,7 @@ class SignUpScreen extends StatelessWidget {
                     right: 25.w,
                   ),
                   child: Form(
-                    key: _formKey,
+                    key: controller.formKey.value,
                     child: Column(
                       children: [
                         Row(
@@ -76,7 +75,6 @@ class SignUpScreen extends StatelessWidget {
                           height: 50.h,
                         ),
                         AuthTextFromField(
-                          textFieldKey: controller.nameKey.value,
                           onChanged: controller.setName,
                           obscureText: false,
                           keyboardType: TextInputType.text,
@@ -90,7 +88,6 @@ class SignUpScreen extends StatelessWidget {
                           height: 15.h,
                         ),
                         AuthTextFromField(
-                          textFieldKey: controller.emailKey.value,
                           onChanged: controller.setEmail,
                           obscureText: false,
                           keyboardType: TextInputType.emailAddress,
@@ -104,7 +101,6 @@ class SignUpScreen extends StatelessWidget {
                           height: 15.h,
                         ),
                         AuthTextFromField(
-                          textFieldKey: controller.passwordKey.value,
                           onChanged: controller.setPassword,
                           obscureText: true,
                           keyboardType: TextInputType.text,
@@ -118,7 +114,6 @@ class SignUpScreen extends StatelessWidget {
                           height: 15.h,
                         ),
                         AuthTextFromField(
-                          textFieldKey: controller.confirmPasswordKey.value,
                           onChanged: controller.setConfirmPassword,
                           obscureText: true,
                           keyboardType: TextInputType.text,
@@ -139,7 +134,7 @@ class SignUpScreen extends StatelessWidget {
                         AuthButton(
                           text: 'SIGN UP',
                           onPressed: () {
-                            _formKey.currentState!.validate();
+                            controller.formKey.value.currentState!.validate();
                             Get.toNamed(Routes.emailVerification);
                             print(controller.userName.value);
                             print(controller.userEmail.value);

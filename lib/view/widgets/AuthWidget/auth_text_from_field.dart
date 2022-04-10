@@ -10,7 +10,7 @@ class AuthTextFromField extends StatelessWidget {
   final String hintText;
   final Widget prefixIcon;
   final Widget suffixIcon;
-  final GlobalKey<FormFieldState> textFieldKey;
+  // final GlobalKey<FormFieldState> textFieldKey;
 
   OutlineInputBorder BorderStyle = OutlineInputBorder(
     borderRadius: BorderRadius.circular(10.r),
@@ -27,19 +27,18 @@ class AuthTextFromField extends StatelessWidget {
     required this.prefixIcon,
     required this.suffixIcon,
     required this.onChanged,
-    required this.textFieldKey,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      key: textFieldKey,
       onChanged: (value) => onChanged(value),
       obscureText: obscureText,
       keyboardType: keyboardType,
       textInputAction: textInputAction,
       cursorColor: Colors.black,
       validator: (value) => validator(value),
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: TextStyle(
